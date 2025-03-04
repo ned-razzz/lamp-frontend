@@ -85,3 +85,8 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+/* 크롬, 사파리, 오페라 스크롤바 제거 */
+*::-webkit-scrollbar {
+  display: none;
+}
