@@ -1,5 +1,6 @@
 import React from "react";
 import { MdManageSearch } from "react-icons/md";
+import { IoLibrarySharp } from "react-icons/io5";
 
 interface Tag {
   id: number;
@@ -74,38 +75,43 @@ const ArchivePage = () => {
   ];
 
   return (
-    <div className="mx-4">
-      <header className="mb-4">
-        <h1 className="font-bold text-xl">자료실</h1>
+    <>
+      <header>
+        <div className="max-w-lg p-4 flex items-center">
+          <IoLibrarySharp className="mr-1" size={25} />
+          <h1 className="font-bold text-xl">자료실</h1>
+        </div>
       </header>
       {/* Search bar */}
-      <section className="mb-4">
-        <div className="relative">
+      <section>
+        <div className="relative px-4 pb-4">
           <input
             type="text"
             placeholder="제목으로 검색하세요"
             className="overflow-x-auto whitespace-nowrap w-full px-10 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
           />
-          <MdManageSearch className="absolute left-3 top-3 text-gray-400" size={20} />
+          <MdManageSearch className="absolute left-7 inset-y-1/2 -translate-y-1/2" size={24} />
         </div>
       </section>
       {/* Tags */}
-      <section className="mb-4 overflow-x-auto">
-        <ul className="flex gap-2">
-          {tags.map((tag) => (
-            <li key={tag.id}>
-              <TagItem tag={tag} />
-            </li>
-          ))}
-        </ul>
+      <section>
+        <div className="px-4 overflow-x-auto">
+          <ul className="flex gap-2">
+            {tags.map((tag) => (
+              <li key={tag.id}>
+                <TagItem tag={tag} />
+              </li>
+            ))}
+          </ul>
+        </div>
       </section>
       {/* Document */}
-      <section className="mb-4 flex flex-col gap-2">
+      <section className="p-6 flex flex-col gap-4">
         {docuemnts.map((document) => (
           <DocumentItem key={document.id} document={document} />
         ))}
       </section>
-    </div>
+    </>
   );
 };
 
@@ -130,7 +136,7 @@ const DocumentItem = ({ document }: { document: Document }) => {
               <li key={tag.id}>#{tag.name}</li>
             ))}
           </ul>
-          <p className="text-sm line-clamp-2">{document.description}</p>
+          <p className="text-sm line-clamp-2 w-3/4">{document.description}</p>
         </section>
         <section className="absolute top-4 right-4">
           <a

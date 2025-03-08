@@ -9,12 +9,12 @@ const GalleryPage = () => {
   return (
     <>
       <header>
-        <div className="max-w-lg mx-4 mb-4 flex items-center">
-          <IoCamera className="mr-2 text-blue-500" size={24} />
-          <h1 className="text-xl font-bold text-gray-800">Gallery</h1>
+        <div className="p-4 flex items-center">
+          <IoCamera className="mr-1" size={25} />
+          <h1 className="text-xl font-bold">갤러리</h1>
         </div>
       </header>
-      <div className="min-h-screen">
+      <div>
         <Gallery />
       </div>
     </>
