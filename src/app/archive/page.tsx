@@ -7,20 +7,18 @@ interface Tag {
   name: string;
 }
 
-interface File {
-  extension: string;
-  downloadUrl: string;
-}
-
 interface Document {
   id: number;
   title: string;
   description: string;
-  tags: Tag[];
-  file: File;
+  authorName: string;
+  tags: string[];
+  fileUrls: string[];
+  created: Date;
+  updated: Date;
 }
 
-const ArchivePage = () => {
+const loadTags = async () => {
   const tags: Tag[] = [
     { id: 1, name: "태그1" },
     { id: 2, name: "태그2" },
@@ -32,47 +30,21 @@ const ArchivePage = () => {
     { id: 8, name: "태그8" },
     { id: 9, name: "태그9" },
   ];
+  return tags;
+};
 
-  const file: File = {
-    extension: "HWP",
-    downloadUrl: "#",
-  };
+const loadDocuments = async () => {
+  const response = await fetch("http://localhost:8080/api/v1/documents");
+  if (!response.ok) {
+    throw new Error("Failed fetching documents");
+  }
+  return response.json();
+};
 
-  // Mock data for resources
-  const docuemnts: Document[] = [
-    {
-      id: 1,
-      title: "자료 항목 1",
-      description:
-        "Ex do adipisicing ut dolore qui. Proident qui voluptate velit sit sunt sint deserunt officia id laboris consectetur. Aliqua dolore sunt do exercitation adipisicing pariatur irure cillum dolor irure ad. Minim ea enim elit tempor laborum qui quis enim proident eiusmod anim elit laboris id.",
-      tags: [tags[1], tags[2], tags[3]],
-      file: file,
-    },
-    {
-      id: 2,
-      title: "자료 항목 2",
-      description:
-        "Ex do adipisicing ut dolore qui. Proident qui voluptate velit sit sunt sint deserunt officia id laboris consectetur. Aliqua dolore sunt do exercitation adipisicing pariatur irure cillum dolor irure ad. Minim ea enim elit tempor laborum qui quis enim proident eiusmod anim elit laboris id.",
-      tags: [],
-      file: file,
-    },
-    {
-      id: 3,
-      title: "자료 항목 3",
-      description:
-        "Ex do adipisicing ut dolore qui. Proident qui voluptate velit sit sunt sint deserunt officia id laboris consectetur. Aliqua dolore sunt do exercitation adipisicing pariatur irure cillum dolor irure ad. Minim ea enim elit tempor laborum qui quis enim proident eiusmod anim elit laboris id.",
-      tags: [tags[0], tags[1], tags[4]],
-      file: file,
-    },
-    {
-      id: 4,
-      title: "자료 항목 4",
-      description:
-        "Ex do adipisicing ut dolore qui. Proident qui voluptate velit sit sunt sint deserunt officia id laboris consectetur. Aliqua dolore sunt do exercitation adipisicing pariatur irure cillum dolor irure ad. Minim ea enim elit tempor laborum qui quis enim proident eiusmod anim elit laboris id.",
-      tags: [tags[0], tags[1], tags[4]],
-      file: file,
-    },
-  ];
+const ArchivePage = async () => {
+  const tags = await loadTags();
+  // const documents = await loadDocumentsTest();
+  const documents: Document[] = await loadDocuments();
 
   return (
     <>
@@ -107,7 +79,7 @@ const ArchivePage = () => {
       </section>
       {/* Document */}
       <section className="p-6 flex flex-col gap-4">
-        {docuemnts.map((document) => (
+        {documents.map((document) => (
           <DocumentItem key={document.id} document={document} />
         ))}
       </section>
@@ -132,17 +104,26 @@ const DocumentItem = ({ document }: { document: Document }) => {
           <header className="font-bold text-xl">{document.title}</header>
           <ul className="flex gap-2 text-sm">
             {document.tags.length === 0 ? <li>태그 없음</li> : <></>}
-            {document.tags.map((tag) => (
-              <li key={tag.id}>#{tag.name}</li>
+            {document.tags.map((tag, index) => (
+              <li key={index}>#{tag}</li>
             ))}
           </ul>
           <p className="text-sm line-clamp-2 w-3/4">{document.description}</p>
+          <ul className="text-sm">
+            {document.fileUrls.map((fileUrl, index) => {
+              return (
+                <li key={index} className="list-inside list-disc">
+                  <a href={fileUrl}>file.{index}</a>
+                </li>
+              );
+            })}
+          </ul>
         </section>
         <section className="absolute top-4 right-4">
           <a
-            href={document.file.extension}
+            href={document.fileUrls[0]}
             className="border-2 border-black rounded-full w-12 h-12 flex items-center justify-center">
-            <span className="font-bold text-sm">{document.file.extension}</span>
+            <span className="font-bold text-sm">FILE</span>
           </a>
         </section>
       </div>
