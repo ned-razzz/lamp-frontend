@@ -5,9 +5,6 @@ const Nav = () => {
     <nav>
       <ul className="flex justify-center items-center gap-2">
         <li>
-          <Link href="/about">About</Link>
-        </li>
-        <li>
           <Link href="/archive">Archive</Link>
         </li>
         <li>
