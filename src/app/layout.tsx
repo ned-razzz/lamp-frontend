@@ -22,8 +22,10 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-        <Header />
-        <main>{children}</main>
+        <div className="mx-auto max-w-[425px] min-h-screen border-x-2">
+          <Header />
+          <main>{children}</main>
+        </div>
       </body>
     </html>
   );
