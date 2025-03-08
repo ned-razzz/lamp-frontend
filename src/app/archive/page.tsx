@@ -43,11 +43,10 @@ const loadDocuments = async () => {
 
 const ArchivePage = async () => {
   const tags = await loadTags();
-  // const documents = await loadDocumentsTest();
   const documents: Document[] = await loadDocuments();
 
   return (
-    <>
+    <div className="bg-gray-50">
       <header>
         <div className="max-w-lg p-4 flex items-center">
           <IoLibrarySharp className="mr-1" size={25} />
@@ -56,18 +55,18 @@ const ArchivePage = async () => {
       </header>
       {/* Search bar */}
       <section>
-        <div className="relative px-4 pb-4">
+        <div className="mx-8 px-4 bg-white rounded-full flex items-center shadow-sm border border-gray-100 focus:ring-blue-300 transition-all">
+          <MdManageSearch size={20} className="text-gray-400" />
           <input
             type="text"
             placeholder="제목으로 검색하세요"
-            className="overflow-x-auto whitespace-nowrap w-full px-10 py-2 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-blue-300 transition"
+            className="px-3 py-2 w-full outline-none"
           />
-          <MdManageSearch className="absolute left-7 inset-y-1/2 -translate-y-1/2" size={24} />
         </div>
       </section>
       {/* Tags */}
       <section>
-        <div className="px-4 overflow-x-auto">
+        <div className="p-4 overflow-x-auto">
           <ul className="flex gap-2">
             {tags.map((tag) => (
               <li key={tag.id}>
@@ -83,7 +82,7 @@ const ArchivePage = async () => {
           <DocumentItem key={document.id} document={document} />
         ))}
       </section>
-    </>
+    </div>
   );
 };
 
@@ -113,7 +112,7 @@ const DocumentItem = ({ document }: { document: Document }) => {
             {document.fileUrls.map((fileUrl, index) => {
               return (
                 <li key={index} className="list-inside list-disc">
-                  <a href={fileUrl}>file.{index}</a>
+                  <a href={fileUrl}>file{index}</a>
                 </li>
               );
             })}
