@@ -1,6 +1,8 @@
 import React from "react";
 import { MdManageSearch } from "react-icons/md";
-import { IoLibrarySharp } from "react-icons/io5";
+import { IoLibrarySharp, IoSettingsSharp } from "react-icons/io5";
+import { GrDocumentUpload } from "react-icons/gr";
+import Link from "next/link";
 
 interface Tag {
   id: number;
@@ -44,45 +46,59 @@ const loadDocuments = async () => {
 const ArchivePage = async () => {
   const tags = await loadTags();
   const documents: Document[] = await loadDocuments();
-
   return (
-    <div className="bg-gray-50">
+    <>
       <header>
         <div className="max-w-lg p-4 flex items-center">
           <IoLibrarySharp className="mr-1" size={25} />
           <h1 className="font-bold text-xl">자료실</h1>
         </div>
       </header>
-      {/* Search bar */}
-      <section>
-        <div className="mx-8 px-4 bg-white rounded-full flex items-center shadow-sm border border-gray-100 focus:ring-blue-300 transition-all">
-          <MdManageSearch size={20} className="text-gray-400" />
-          <input
-            type="text"
-            placeholder="제목으로 검색하세요"
-            className="px-3 py-2 w-full outline-none"
-          />
-        </div>
-      </section>
-      {/* Tags */}
-      <section>
-        <div className="p-4 overflow-x-auto">
-          <ul className="flex gap-2">
-            {tags.map((tag) => (
-              <li key={tag.id}>
-                <TagItem tag={tag} />
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
-      {/* Document */}
-      <section className="p-6 flex flex-col gap-4">
-        {documents.map((document) => (
-          <DocumentItem key={document.id} document={document} />
-        ))}
-      </section>
-    </div>
+      <nav className="bg-gray-50 p-4 flex flex-col gap-4">
+        {/* Search bar */}
+        <section>
+          <div className="mx-8 px-4 bg-white rounded-full flex items-center shadow-sm border border-gray-100 focus:ring-blue-300 transition-all">
+            <MdManageSearch size={20} className="text-gray-400" />
+            <input
+              type="text"
+              placeholder="제목으로 검색하세요"
+              className="px-3 py-2 w-full outline-none"
+            />
+          </div>
+        </section>
+        {/* Tags */}
+        <section>
+          <div className="px-4">
+            <ul className="flex flex-wrap gap-2">
+              {tags.map((tag) => (
+                <li key={tag.id}>
+                  <TagItem tag={tag} />
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      </nav>
+      <main className="relative">
+        {/* Document Create/Edit */}
+        <section className="fixed z-10 right-2 bottom-2 flex gap-2">
+          <Link
+            href={"/archive/create"}
+            className="size-12 rounded-full bg-black text-white border-2 border-black shadow-lg flex justify-center items-center">
+            <GrDocumentUpload size={26} />
+          </Link>
+          <button className="size-12 rounded-full bg-black text-white border-2 border-black shadow-lg flex justify-center items-center">
+            <IoSettingsSharp size={30} />
+          </button>
+        </section>
+        {/* Document List */}
+        <section className="z-0 p-6 flex flex-col gap-4">
+          {documents.map((document) => (
+            <DocumentItem key={document.id} document={document} />
+          ))}
+        </section>
+      </main>
+    </>
   );
 };
 
@@ -97,7 +113,7 @@ const TagItem = ({ tag }: { tag: Tag }) => {
 
 const DocumentItem = ({ document }: { document: Document }) => {
   return (
-    <article className="flex justify-center items-center w-full">
+    <article className="bg-white flex justify-center items-center w-full">
       <div className="border-2 rounded-2xl border-black w-full px-4 py-4 relative">
         <section className="flex flex-col gap-1">
           <header className="font-bold text-xl">{document.title}</header>
