@@ -166,7 +166,7 @@ const ScheduleSection = ({ className }: { className: string }) => {
           </p>
         </SectionHeader>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="flex flex-col gap-8">
           {schedules.map((schedule, index) => (
             <ScheduleCard key={index} schedule={schedule} />
           ))}
@@ -178,7 +178,7 @@ const ScheduleSection = ({ className }: { className: string }) => {
 
 const ScheduleCard = ({ schedule }: { schedule: ISechdule }) => {
   return (
-    <article className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow duration-300 flex">
+    <article className="p-6 bg-white border rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex">
       <div className="mr-5 mt-1">
         <schedule.icon size={24} />
       </div>
@@ -201,39 +201,27 @@ const ChurchHistorySection = () => {
   // 교회 연혁 데이터
   const historyEvents = [
     {
-      year: "1995",
-      title: "교회 설립",
-      description: "5명의 성도와 함께 홍길동 목사의 인도로 가정에서 첫 예배를 드렸습니다.",
+      year: "2016",
+      title: "명지대 성경 공부 시작",
+      description: "명지대학교에서 성경 공부 모임을 시작했습니다.",
       icon: <FaChurch className="text-white" size={20} />,
     },
     {
-      year: "1998",
-      title: "첫 성전 건축",
-      description: "성도 50명이 함께하는 교회로 성장하여 첫 성전을 건축하였습니다.",
+      year: "2020",
+      title: "예배 공간 증축",
+      description: "더 많은 성도들을 수용하기 위해 예배 공간을 증축했습니다.",
       icon: <LuBuilding className="text-white" size={20} />,
     },
     {
-      year: "2003",
-      title: "교회학교 설립",
-      description: "다음 세대를 위한 교회학교를 설립하고 주일학교 프로그램을 시작했습니다.",
-      icon: <LuBookOpen className="text-white" size={20} />,
-    },
-    {
-      year: "2008",
-      title: "새 성전 이전",
-      description: "성도 200명이 넘는 교회로 성장하여 더 넓은 현재의 성전으로 이전했습니다.",
+      year: "2022",
+      title: "용인함박교회 설립",
+      description: "용인함박교회를 정식으로 설립하였습니다.",
       icon: <LuMapPin className="text-white" size={20} />,
     },
     {
-      year: "2015",
-      title: "해외 선교 시작",
-      description: "아시아 지역을 중심으로 해외 선교 활동을 시작했습니다.",
-      icon: <LuMapPin className="text-white" size={20} />,
-    },
-    {
-      year: "2023",
-      title: "교회 설립 28주년",
-      description: "500명이 넘는 성도들과 함께 교회 설립 28주년 감사예배를 드렸습니다.",
+      year: "2024",
+      title: "UBF 합동 수련회",
+      description: "UBF와 함께 합동 수련회를 진행했습니다.",
       icon: <LuUsers className="text-white" size={20} />,
     },
   ];
@@ -250,11 +238,11 @@ const ChurchHistorySection = () => {
 
         <div className="relative">
           {/* 수직 타임라인 라인 */}
-          <div className="absolute left-0 md:left-8 top-0 bottom-0 w-1 bg-amber-400"></div>
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-amber-400"></div>
 
           {/* 타임라인 이벤트 */}
           {historyEvents.map((event, index) => (
-            <div key={index} className="relative flex mb-12 md:mb-16 pl-6 md:pl-12">
+            <div key={index} className="relative flex mb-20 pl-6">
               {/* 타임라인 포인트 */}
               <div className="absolute left-0.5 transform -translate-x-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-amber-500 z-1">
                 {event.icon}
