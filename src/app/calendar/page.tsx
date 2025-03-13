@@ -6,7 +6,6 @@ import { TbEdit } from "react-icons/tb";
 const CalendarPage = () => {
   return (
     <div>
-      <h1>Calendar Page</h1>
       <CalendarComponent />
     </div>
   );

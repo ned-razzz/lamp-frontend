@@ -1,6 +1,6 @@
 import React from "react";
 import { MdManageSearch } from "react-icons/md";
-import { IoLibrarySharp, IoSettingsSharp } from "react-icons/io5";
+import { IoSettingsSharp } from "react-icons/io5";
 import { GrDocumentUpload } from "react-icons/gr";
 import Link from "next/link";
 
@@ -48,12 +48,6 @@ const ArchivePage = async () => {
   const documents: Document[] = await loadDocuments();
   return (
     <>
-      <header>
-        <div className="max-w-lg p-4 flex items-center">
-          <IoLibrarySharp className="mr-1" size={25} />
-          <h1 className="font-bold text-xl">자료실</h1>
-        </div>
-      </header>
       <nav className="bg-gray-50 p-4 flex flex-col gap-4">
         {/* Search bar */}
         <section>
@@ -81,16 +75,7 @@ const ArchivePage = async () => {
       </nav>
       <main className="relative">
         {/* Document Create/Edit */}
-        <section className="fixed z-10 right-2 bottom-2 flex gap-2">
-          <Link
-            href={"/archive/create"}
-            className="size-12 rounded-full bg-black text-white border-2 border-black shadow-lg flex justify-center items-center">
-            <GrDocumentUpload size={26} />
-          </Link>
-          <button className="size-12 rounded-full bg-black text-white border-2 border-black shadow-lg flex justify-center items-center">
-            <IoSettingsSharp size={30} />
-          </button>
-        </section>
+        <ToolBar />
         {/* Document List */}
         <section className="z-0 p-6 flex flex-col gap-4">
           {documents.map((document) => (
@@ -101,6 +86,19 @@ const ArchivePage = async () => {
     </>
   );
 };
+
+const ToolBar = () => (
+  <section className="fixed z-10 right-4 bottom-4 flex gap-2">
+    <Link
+      href={"/archive/create"}
+      className="size-12 rounded-full bg-black text-white border-2 border-black shadow-lg flex justify-center items-center">
+      <GrDocumentUpload size={26} />
+    </Link>
+    <button className="size-12 rounded-full bg-black text-white border-2 border-black shadow-lg flex justify-center items-center">
+      <IoSettingsSharp size={30} />
+    </button>
+  </section>
+);
 
 const TagItem = ({ tag }: { tag: Tag }) => {
   return (

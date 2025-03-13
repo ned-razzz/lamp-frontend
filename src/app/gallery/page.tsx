@@ -1,5 +1,4 @@
 import GalleryCompo from "@/components/GalleryCompo";
-import { IoCamera } from "react-icons/io5";
 
 interface Photo {
   id: number;
@@ -44,12 +43,6 @@ const GalleryPage = async () => {
 
   return (
     <>
-      <header>
-        <div className="p-4 flex items-center">
-          <IoCamera className="mr-1" size={25} />
-          <h1 className="text-xl font-bold">갤러리</h1>
-        </div>
-      </header>
       <div>
         <GalleryCompo photos={photos} />
       </div>
