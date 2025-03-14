@@ -1,12 +1,12 @@
 import React from "react";
 import { MdArrowBack, MdEdit, MdDelete } from "react-icons/md";
 import Link from "next/link";
-import { getDocument } from "./actions";
+import { getDocument } from "@/app/archive/actions";
 import { Document } from "../../types";
 
 interface PageProps {
   params: Promise<{
-    id: string;
+    id: number;
   }>;
 }
 
@@ -34,7 +34,7 @@ export default async function DocumentDetailPage({ params }: PageProps) {
   );
 }
 
-const ToolBar = ({ documentId }: { documentId: string }) => {
+const ToolBar = ({ documentId }: { documentId: number }) => {
   return (
     <nav className="fixed bottom-4 right-4 flex flex-col gap-2">
       <Link
