@@ -1,24 +1,7 @@
 import React from "react";
 import { MdManageSearch } from "react-icons/md";
-import { IoSettingsSharp } from "react-icons/io5";
-import { GrDocumentUpload } from "react-icons/gr";
-import Link from "next/link";
-
-interface Tag {
-  id: number;
-  name: string;
-}
-
-interface Document {
-  id: number;
-  title: string;
-  description: string;
-  authorName: string;
-  tags: string[];
-  fileUrls: string[];
-  created: Date;
-  updated: Date;
-}
+import { DocumentItem, ToolBar } from "./components";
+import { Tag, Document } from "./types";
 
 const loadTags = async () => {
   const tags: Tag[] = [
@@ -46,6 +29,7 @@ const loadDocuments = async () => {
 const ArchivePage = async () => {
   const tags = await loadTags();
   const documents: Document[] = await loadDocuments();
+
   return (
     <>
       <nav className="bg-gray-50 p-4 flex flex-col gap-4">
@@ -73,32 +57,17 @@ const ArchivePage = async () => {
           </div>
         </section>
       </nav>
-      <main className="relative">
-        {/* Document Create/Edit */}
+      <section className="relative">
         <ToolBar />
-        {/* Document List */}
         <section className="z-0 p-6 flex flex-col gap-4">
           {documents.map((document) => (
             <DocumentItem key={document.id} document={document} />
           ))}
         </section>
-      </main>
+      </section>
     </>
   );
 };
-
-const ToolBar = () => (
-  <section className="fixed z-10 right-4 bottom-4 flex gap-2">
-    <Link
-      href={"/archive/create"}
-      className="size-12 rounded-full bg-black text-white border-2 border-black shadow-lg flex justify-center items-center">
-      <GrDocumentUpload size={26} />
-    </Link>
-    <button className="size-12 rounded-full bg-black text-white border-2 border-black shadow-lg flex justify-center items-center">
-      <IoSettingsSharp size={30} />
-    </button>
-  </section>
-);
 
 const TagItem = ({ tag }: { tag: Tag }) => {
   return (
@@ -106,41 +75,6 @@ const TagItem = ({ tag }: { tag: Tag }) => {
       className={`flex-none min-w-16 px-2 py-1 rounded-full border bg-white hover:bg-gray-50 text-sm`}>
       {tag.name}
     </button>
-  );
-};
-
-const DocumentItem = ({ document }: { document: Document }) => {
-  return (
-    <article className="bg-white flex justify-center items-center w-full">
-      <div className="border-2 rounded-2xl border-black w-full px-4 py-4 relative">
-        <section className="flex flex-col gap-1">
-          <header className="font-bold text-xl">{document.title}</header>
-          <ul className="flex gap-2 text-sm">
-            {document.tags.length === 0 ? <li>태그 없음</li> : <></>}
-            {document.tags.map((tag, index) => (
-              <li key={index}>#{tag}</li>
-            ))}
-          </ul>
-          <p className="text-sm line-clamp-2 w-3/4">{document.description}</p>
-          <ul className="text-sm">
-            {document.fileUrls.map((fileUrl, index) => {
-              return (
-                <li key={index} className="list-inside list-disc">
-                  <a href={fileUrl}>file{index}</a>
-                </li>
-              );
-            })}
-          </ul>
-        </section>
-        <section className="absolute top-4 right-4">
-          <a
-            href={document.fileUrls[0]}
-            className="border-2 border-black rounded-full w-12 h-12 flex items-center justify-center">
-            <span className="font-bold text-sm">FILE</span>
-          </a>
-        </section>
-      </div>
-    </article>
   );
 };
 

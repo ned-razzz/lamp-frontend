@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { createDocument, uploadDocumentFiles } from "./actions";
+import { createDocument, uploadDocumentFiles } from "@/app/archive/actions";
 
 // 타입 정의
 export interface DocumentFormData {
