@@ -1,8 +1,9 @@
 import React from "react";
-import { MdArrowBack, MdEdit, MdDelete } from "react-icons/md";
+import { MdArrowBack } from "react-icons/md";
 import Link from "next/link";
 import { getDocument } from "@/app/archive/actions";
 import { Document } from "../../types";
+import ToolBar from "./components";
 
 interface PageProps {
   params: Promise<{
@@ -33,24 +34,6 @@ export default async function DocumentDetailPage({ params }: PageProps) {
     </div>
   );
 }
-
-const ToolBar = ({ documentId }: { documentId: number }) => {
-  return (
-    <nav className="fixed bottom-4 right-4 flex flex-col gap-2">
-      <Link
-        href={`/archive/documents/${documentId}/edit`}
-        className="bg-indigo-600 text-white rounded-full p-3 shadow-lg hover:bg-indigo-700 hover:shadow-xl transition-all"
-        title="수정">
-        <MdEdit className="w-6 h-6" />
-      </Link>
-      <button
-        className="bg-red-500 text-white rounded-full p-3 shadow-lg hover:bg-red-600 hover:shadow-xl transition-all"
-        title="삭제">
-        <MdDelete className="w-6 h-6" />
-      </button>
-    </nav>
-  );
-};
 
 const DocumentDetail = ({ document }: { document: Document }) => {
   return (

@@ -107,3 +107,18 @@ export async function updateDocument(
     };
   }
 }
+
+export async function deleteDocument(id: number) {
+  const apiUrl = `v1/documents/${id}`;
+
+  const response = await fetch(`http://localhost:8080/api/${apiUrl}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(`DELETE /${apiUrl}: ` + errorData?.message);
+  }
+
+  return;
+}

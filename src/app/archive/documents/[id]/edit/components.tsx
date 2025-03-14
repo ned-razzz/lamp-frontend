@@ -3,14 +3,12 @@
 import React, { useState } from "react";
 import { Document } from "@/app/archive/types";
 import { updateDocument } from "@/app/archive/actions";
-import { useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import { MdArrowBack } from "react-icons/md";
 import Link from "next/link";
 
 // 문서 편집 폼 컴포넌트
 export const DocumentEditForm = ({ document }: { document: Document }) => {
-  const router = useRouter();
-
   // 폼 상태 관리
   const [title, setTitle] = useState(document.title);
   const [description, setDescription] = useState(document.description);
@@ -71,8 +69,8 @@ export const DocumentEditForm = ({ document }: { document: Document }) => {
       setSuccess(true);
       // 성공 후 문서 상세 페이지로 리다이렉트
       setTimeout(() => {
-        router.push(`/archive/documents/${document.id}`);
-      }, 1500);
+        redirect(`/archive/documents/${document.id}`);
+      }, 1000);
     } else {
       setError(result.error || "문서 업데이트에 실패했습니다.");
     }
