@@ -1,17 +1,30 @@
-import { Document } from "@/app/archive/types";
+import { Document, Tag } from "@/app/archive/types";
 
-export async function getDocument(id: number): Promise<Document> {
+export const getDocument = async (id: number): Promise<Document> => {
   const apiUrl = `v1/documents/${id}`;
 
   const response = await fetch(`http://localhost:8080/api/${apiUrl}`);
 
   if (!response.ok) {
     const errorData = await response.json().catch(() => null);
-    throw new Error(`POST /${apiUrl}: ` + errorData?.message);
+    throw new Error(`GET /${apiUrl}: ` + errorData?.message);
   }
 
   return response.json();
-}
+};
+
+export const getDocuments = async (): Promise<Document[]> => {
+  const apiUrl = `v1/documents`;
+
+  const response = await fetch(`http://localhost:8080/api/${apiUrl}`);
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(`GET /${apiUrl}: ` + errorData?.message);
+  }
+
+  return response.json();
+};
 
 // 문서 생성을 위한 서버 액션
 export async function createDocument(documentData: {
@@ -122,3 +135,16 @@ export async function deleteDocument(id: number) {
 
   return;
 }
+
+export const getDocumentTags = async (): Promise<Tag[]> => {
+  const apiUrl = `v1/tags/documents`;
+
+  const response = await fetch(`http://localhost:8080/api/${apiUrl}`);
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(`GET /${apiUrl}: ` + errorData?.message);
+  }
+
+  return response.json();
+};
