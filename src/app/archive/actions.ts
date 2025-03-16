@@ -26,6 +26,42 @@ export const getDocuments = async (): Promise<Document[]> => {
   return response.json();
 };
 
+export const searchDocuments = async (params?: {
+  title?: string;
+  tags?: number[];
+}): Promise<Document[]> => {
+  let apiUrl = `v1/documents`;
+
+  // Add query parameters if provided
+  if (params) {
+    const queryParams = new URLSearchParams();
+
+    if (params.title) {
+      queryParams.append("title", params.title);
+    }
+
+    if (params.tags && params.tags.length > 0) {
+      params.tags.forEach((tagId) => {
+        queryParams.append("tags", tagId.toString());
+      });
+    }
+
+    if (queryParams.toString()) {
+      apiUrl += `?${queryParams.toString()}`;
+    }
+  }
+  console.log(apiUrl);
+
+  const response = await fetch(`http://localhost:8080/api/${apiUrl}`);
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(`GET /${apiUrl}: ` + errorData?.message);
+  }
+
+  return response.json();
+};
+
 // 문서 생성을 위한 서버 액션
 export async function createDocument(documentData: {
   creatorMemberId: number;
