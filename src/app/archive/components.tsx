@@ -10,7 +10,7 @@ import { searchDocuments } from "./actions";
 export const ToolBar = () => (
   <section className="fixed z-10 right-4 bottom-4 flex gap-2">
     <Link
-      href={"/archive/create"}
+      href={"/archive/documents/create"}
       className="size-14 rounded-full bg-black text-white border-2 border-black shadow-lg flex justify-center items-center">
       <GrDocumentUpload size={28} />
     </Link>
