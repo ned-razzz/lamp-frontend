@@ -23,3 +23,5 @@ export interface PhotoFormData {
   tagNames: string[];
   file: File | null;
 }
+
+export type PhotoFormValue = string | string[] | File;

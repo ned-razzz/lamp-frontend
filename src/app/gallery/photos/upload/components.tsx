@@ -3,13 +3,13 @@
 import { useState, useEffect } from "react";
 import { IoClose, IoTrash } from "react-icons/io5";
 import Image from "next/image";
-import { PhotoFormData } from "../../types";
+import { PhotoFormData, PhotoFormValue } from "../../types";
 
 interface PhotoFormProps {
   index: number;
   photoData: PhotoFormData;
   errors?: Record<string, string>;
-  onChange: (index: number, fieldName: string, value: any) => void;
+  onChange: (index: number, fieldName: string, value: PhotoFormValue) => void;
   onRemove: (index: number) => void;
 }
 

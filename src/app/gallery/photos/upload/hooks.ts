@@ -3,8 +3,7 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createPhotos, uploadPhotoFiles } from "../../actions";
-import { PhotoFormData } from "../../types";
-import { convertHeicToJpg } from "@/utils/imgConverter";
+import { PhotoFormData, PhotoFormValue } from "../../types";
 
 export const usePhotoUpload = () => {
   const router = useRouter();
@@ -63,7 +62,7 @@ export const usePhotoUpload = () => {
   };
 
   // 폼 필드 변경 처리
-  const handlePhotoDataChange = (photoIndex: number, fieldName: string, value: any) => {
+  const handlePhotoDataChange = (photoIndex: number, fieldName: string, value: PhotoFormValue) => {
     const newPhotosData = [...photosData];
     newPhotosData[photoIndex] = {
       ...newPhotosData[photoIndex],
@@ -79,40 +78,24 @@ export const usePhotoUpload = () => {
 
       // 각 파일마다 새 사진 데이터 생성
       const newPhotosData = await Promise.all(
-        files.map(async (file) => {
-          // 파일명에서 제목 생성 시도
-          const fileName = file.name.replace(/\.[^/.]+$/, ""); // 확장자 제거
-          const title = fileName.length > 30 ? fileName.substring(0, 27) + "..." : fileName;
+        files
+          //JPG, PNG 파일만 적용
+          .filter((file) => file.type === "image/jpeg" || file.type === "image/png")
+          // 파일마다 PhotoFormData로 변환
+          .map(async (file) => {
+            const fileName = file.name.replace(/\.[^/.]+$/, ""); // 확장자 제거
+            const title = fileName.length > 30 ? fileName.substring(0, 27) + "..." : fileName;
 
-          // heic 파일 jpg로 변경
-          const fileType = file.name.toLowerCase().split(".")[1];
-          if (fileType === "heic" || fileType === "heif") {
-            const jpgFile = await convertHeicToJpg(file);
-            file = jpgFile!;
-          }
-          console.log(URL.createObjectURL(file));
-
-          return {
-            ...defaultPhotoData,
-            title,
-            file,
-          };
-        })
+            return {
+              ...defaultPhotoData,
+              title,
+              file,
+            };
+          })
       );
 
       setPhotosData([...photosData, ...newPhotosData]);
     }
-  };
-
-  const getFileSize = (file: File) => {
-    // File 객체의 size 속성은 바이트 단위로 파일 크기를 반환합니다
-    const fileSizeBytes = file.size;
-
-    // 필요에 따라 KB, MB 등으로 변환할 수 있습니다
-    const fileSizeKB = fileSizeBytes / 1024;
-    const fileSizeMB = fileSizeKB / 1024;
-
-    return fileSizeMB.toFixed(2);
   };
 
   // 모든 사진 폼 유효성 검사

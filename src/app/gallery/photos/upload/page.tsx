@@ -74,7 +74,7 @@ const BatchPhotoUploadPage = () => {
             <div className="relative">
               <input
                 type="file"
-                accept="image/*"
+                accept="image/png, image/jpeg"
                 multiple
                 onChange={handleMultipleFiles}
                 className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
