@@ -550,6 +550,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/heic-convert@npm:^2":
+  version: 2.1.0
+  resolution: "@types/heic-convert@npm:2.1.0"
+  checksum: 10c0/9026ba11605c9b5fac4288bce3cecbb26291e4d5ef9b4fc049a28848bbbd22e58e456ca2fb32d3ae35f01d425b17c43c5b2c528493fb6ee2fe5cff72b691abbb
+  languageName: node
+  linkType: hard
+
 "@types/json-schema@npm:^7.0.15":
   version: 7.0.15
   resolution: "@types/json-schema@npm:7.0.15"
@@ -1941,11 +1948,14 @@ __metadata:
   resolution: "frontend@workspace:."
   dependencies:
     "@eslint/eslintrc": "npm:^3"
+    "@types/heic-convert": "npm:^2"
     "@types/node": "npm:^20"
     "@types/react": "npm:^19"
     "@types/react-dom": "npm:^19"
     eslint: "npm:^9"
     eslint-config-next: "npm:15.1.6"
+    heic-convert: "npm:^2.1.0"
+    heic2any: "npm:^0.0.4"
     next: "npm:15.1.6"
     postcss: "npm:^8"
     react: "npm:^19.0.0"
@@ -2186,6 +2196,33 @@ __metadata:
   dependencies:
     function-bind: "npm:^1.1.2"
   checksum: 10c0/3769d434703b8ac66b209a4cca0737519925bbdb61dd887f93a16372b14694c63ff4e797686d87c90f08168e81082248b9b028bad60d4da9e0d1148766f56eb9
+  languageName: node
+  linkType: hard
+
+"heic-convert@npm:^2.1.0":
+  version: 2.1.0
+  resolution: "heic-convert@npm:2.1.0"
+  dependencies:
+    heic-decode: "npm:^2.0.0"
+    jpeg-js: "npm:^0.4.4"
+    pngjs: "npm:^6.0.0"
+  checksum: 10c0/78fe882b2fc5d76d9d2b577979cd234cbeab80c95d4cd4e7b46b949eb0a1ee80d73a87901190db855a3546a8109c289d8c81b0f5d2ab29774409627f8d19c698
+  languageName: node
+  linkType: hard
+
+"heic-decode@npm:^2.0.0":
+  version: 2.0.0
+  resolution: "heic-decode@npm:2.0.0"
+  dependencies:
+    libheif-js: "npm:^1.17.1"
+  checksum: 10c0/ee99f2d7aee85c767f9334ae05e702139157a7ffb855037af51c6f128b8f150fa8a9a78bb4692f2cf493c1ccffe5533e96b0281dc7634136e29ec615d1ba903e
+  languageName: node
+  linkType: hard
+
+"heic2any@npm:^0.0.4":
+  version: 0.0.4
+  resolution: "heic2any@npm:0.0.4"
+  checksum: 10c0/36a22e1df08de088322ac018d8e5de24911f93d6c2d8b3bd2ea9baeeb8630c031bc1eb9eaa10d4c6c3b4780ed3410e7eb0283ffd3dfb441e370bec8634003c43
   languageName: node
   linkType: hard
 
@@ -2584,6 +2621,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"jpeg-js@npm:^0.4.4":
+  version: 0.4.4
+  resolution: "jpeg-js@npm:0.4.4"
+  checksum: 10c0/4d0d5097f8e55d8bbce6f1dc32ffaf3f43f321f6222e4e6490734fdc6d005322e3bd6fb992c2df7f5b587343b1441a1c333281dc3285bc9116e369fd2a2b43a7
+  languageName: node
+  linkType: hard
+
 "js-tokens@npm:^3.0.0 || ^4.0.0":
   version: 4.0.0
   resolution: "js-tokens@npm:4.0.0"
@@ -2685,6 +2729,13 @@ __metadata:
     prelude-ls: "npm:^1.2.1"
     type-check: "npm:~0.4.0"
   checksum: 10c0/effb03cad7c89dfa5bd4f6989364bfc79994c2042ec5966cb9b95990e2edee5cd8969ddf42616a0373ac49fac1403437deaf6e9050fbbaa3546093a59b9ac94e
+  languageName: node
+  linkType: hard
+
+"libheif-js@npm:^1.17.1":
+  version: 1.18.2
+  resolution: "libheif-js@npm:1.18.2"
+  checksum: 10c0/82d3f12ab730ca2737c50e473bfbf7b6ae37c300296f6ab8e25ce6ec5bc88615f210e684ca7315aa970b1bd87b3b62c607dfb52d126596ed06a46441f2a5a379
   languageName: node
   linkType: hard
 
@@ -3240,6 +3291,13 @@ __metadata:
   version: 4.0.6
   resolution: "pirates@npm:4.0.6"
   checksum: 10c0/00d5fa51f8dded94d7429700fb91a0c1ead00ae2c7fd27089f0c5b63e6eca36197fe46384631872690a66f390c5e27198e99006ab77ae472692ab9c2ca903f36
+  languageName: node
+  linkType: hard
+
+"pngjs@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "pngjs@npm:6.0.0"
+  checksum: 10c0/ac23ea329b1881d1a10575aff58116dc27b894ec3f5b84ba15c7f527d21e609fbce7ba16d48f8ccb86c7ce45ceed622472765476ab2875949d4bec55e153f87a
   languageName: node
   linkType: hard
 
