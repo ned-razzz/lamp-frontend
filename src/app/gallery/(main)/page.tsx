@@ -1,8 +1,8 @@
 import { GalleryGrid } from "./components";
 import Link from "next/link";
 import { MdEdit } from "react-icons/md";
-import { Photo } from "./types";
-import { getPhotos } from "./actions";
+import { Photo } from "../types";
+import { getPhotos } from "../actions";
 
 const GalleryPage = async () => {
   const photos: Photo[] = await getPhotos();

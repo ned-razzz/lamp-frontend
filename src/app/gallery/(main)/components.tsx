@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { IoAdd } from "react-icons/io5";
-import { Photo } from "./types";
+import { Photo } from "../types";
 
 interface GalleryGridProps {
   photos: Photo[];

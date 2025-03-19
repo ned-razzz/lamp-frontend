@@ -2,10 +2,10 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Document, Tag } from "./types";
+import { Document, Tag } from "../types";
 import { GrDocumentUpload } from "react-icons/gr";
 import { MdManageSearch } from "react-icons/md";
-import { searchDocuments } from "./actions";
+import { searchDocuments } from "../actions";
 
 export const ToolBar = () => (
   <section className="fixed z-10 right-4 bottom-4 flex gap-2">
