@@ -39,6 +39,34 @@ const BatchPhotoUploadPage = () => {
         </div>
       </div>
 
+      {/* 파일 선택 카드 */}
+      <div className="bg-white rounded-lg shadow-md p-6 mb-4">
+        <div className="relative">
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            multiple
+            onChange={handleMultipleFiles}
+            className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+          />
+          <div className="border-2 border-dashed border-blue-200 rounded-lg p-4 text-center hover:border-blue-400 transition-colors">
+            <div className="flex flex-col items-center">
+              <IoAdd size={40} className="text-blue-500 mb-2" />
+              <p className="text-blue-600 font-medium mb-1">파일 탐색기에서 사진 선택하기</p>
+            </div>
+          </div>
+        </div>
+
+        {photosData.length > 0 && (
+          <div className="mt-4 bg-blue-50 text-blue-800 p-3 rounded-md flex items-center">
+            <div className="bg-blue-100 rounded-full w-8 h-8 flex items-center justify-center mr-3">
+              <span className="font-bold">{photosData.length}</span>
+            </div>
+            <p>개의 사진이 추가되었습니다. 각 사진의 제목을 확인해주세요.</p>
+          </div>
+        )}
+      </div>
+
       <div className="container mx-auto px-4 py-6">
         <form onSubmit={handleSubmit}>
           {/* 사진 그리드 (고밀도) */}
@@ -68,34 +96,6 @@ const BatchPhotoUploadPage = () => {
               />
             </>
           )}
-
-          {/* 파일 선택 카드 */}
-          <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-            <div className="relative">
-              <input
-                type="file"
-                accept="image/png, image/jpeg"
-                multiple
-                onChange={handleMultipleFiles}
-                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
-              />
-              <div className="border-2 border-dashed border-blue-200 rounded-lg p-4 text-center hover:border-blue-400 transition-colors">
-                <div className="flex flex-col items-center">
-                  <IoAdd size={40} className="text-blue-500 mb-2" />
-                  <p className="text-blue-600 font-medium mb-1">파일 탐색기에서 사진 선택하기</p>
-                </div>
-              </div>
-            </div>
-
-            {photosData.length > 0 && (
-              <div className="mt-4 bg-blue-50 text-blue-800 p-3 rounded-md flex items-center">
-                <div className="bg-blue-100 rounded-full w-8 h-8 flex items-center justify-center mr-3">
-                  <span className="font-bold">{photosData.length}</span>
-                </div>
-                <p>개의 사진이 추가되었습니다. 각 사진의 제목을 확인해주세요.</p>
-              </div>
-            )}
-          </div>
 
           {/* 고정된 하단 업로드 버튼 */}
           <div className="fixed bottom-0 left-0 right-0 bg-white shadow-lg border-t border-gray-200 p-4 z-10">

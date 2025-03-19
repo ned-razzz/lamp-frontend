@@ -73,8 +73,10 @@ export const usePhotoUpload = () => {
 
   // 여러 사진 파일을 한번에 선택
   const handleMultipleFiles = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.debug("handleMultipleFiles executed");
     if (e.target.files && e.target.files.length > 0) {
       const files = Array.from(e.target.files);
+      e.target.value = ""; //input의 file 데이터 초기화, 이 작업이 있어야 onChange 이벤트가 정상적으로 작동동
 
       // 각 파일마다 새 사진 데이터 생성
       const newPhotosData = await Promise.all(
@@ -93,6 +95,7 @@ export const usePhotoUpload = () => {
             };
           })
       );
+      console.log(newPhotosData);
 
       setPhotosData([...photosData, ...newPhotosData]);
     }

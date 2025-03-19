@@ -9,25 +9,48 @@ interface GalleryGridProps {
   photos: Photo[];
 }
 
+// Origin Helper: 컬럼 위치에 따라 적절한 origin 클래스를 반환하는 함수
+const getOriginClass = (index) => {
+  // 컬럼 위치 계산 (0: 왼쪽, 1: 중간, 2: 오른쪽)
+  const columnPosition = index % 3;
+
+  // 위치에 따라 다른 origin 클래스 반환
+  if (columnPosition === 0) {
+    return "origin-top-left"; // 왼쪽 컬럼
+  } else if (columnPosition === 1) {
+    return "origin-top"; // 중간 컬럼
+  } else {
+    return "origin-top-right"; // 오른쪽 컬럼
+  }
+};
+
 const GalleryGrid = ({ photos }: GalleryGridProps) => {
   return (
     <div className="container mx-auto p-4">
       {/* 업로드 버튼 */}
-      <div className="mb-6 flex justify-end">
+      <div className="mb-6 flex justify-center">
         <Link
           href="/gallery/photos/upload"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition flex items-center">
+          className="w-60 h-12 rounded bg-blue-500 text-white hover:bg-blue-600 transition flex justify-center items-center">
           <IoAdd className="mr-1" /> 사진 업로드
         </Link>
       </div>
 
       {/* 갤러리 그리드 - 3열 레이아웃 */}
-      <div className="grid grid-cols-3 gap-2">
+      <div
+        className="grid grid-cols-3 gap-2"
+        onContextMenu={(e) => {
+          e.preventDefault();
+          return false;
+        }}>
         {photos.length > 0 ? (
-          photos.map((photo) => (
+          photos.map((photo, index) => (
             <div key={photo.id} className="relative group">
               {/* 호버 시 전체 컴포넌트가 확대되는 컨테이너 */}
-              <div className="relative overflow-visible transition-all duration-300 origin-center transform group-hover:scale-150 group-hover:z-20 z-10">
+              <div
+                className={`relative overflow-visible transition-all duration-300 ${getOriginClass(
+                  index
+                )} transform group-hover:scale-[1.8] group-hover:z-20 z-10`}>
                 {/* 이미지 컨테이너 */}
                 <div className="relative overflow-hidden rounded-md group-hover:rounded-b-none aspect-square shadow-md">
                   <Image
@@ -75,11 +98,6 @@ const GalleryGrid = ({ photos }: GalleryGridProps) => {
         ) : (
           <div className="col-span-3 text-center py-12">
             <p className="text-lg text-gray-500 mb-4">갤러리에 사진이 없습니다.</p>
-            <Link
-              href="/gallery/photos/upload"
-              className="inline-block bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600 transition">
-              첫 사진 업로드하기
-            </Link>
           </div>
         )}
       </div>
