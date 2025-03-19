@@ -50,7 +50,6 @@ export const searchDocuments = async (params?: {
       apiUrl += `?${queryParams.toString()}`;
     }
   }
-  console.log(apiUrl);
 
   const response = await fetch(`http://localhost:8080/api/${apiUrl}`);
 

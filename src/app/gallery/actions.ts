@@ -1,4 +1,4 @@
-import { Photo } from "./types";
+import { Photo, Tag } from "./types";
 
 export interface PhotoBatchUpload {
   creatorMemberId: number;
@@ -90,3 +90,49 @@ export async function deletePhoto(id: number) {
 
   return true;
 }
+
+export const searchPhotos = async (params?: {
+  title?: string;
+  tags?: number[];
+}): Promise<Photo[]> => {
+  let apiUrl = `v1/photos`;
+
+  // Add query parameters if provided
+  if (params) {
+    const queryParams = new URLSearchParams();
+
+    if (params.title) {
+      queryParams.append("title", params.title);
+    }
+
+    if (params.tags && params.tags.length > 0) {
+      params.tags.forEach((tagId) => {
+        queryParams.append("tags", tagId.toString());
+      });
+    }
+
+    apiUrl += `?${queryParams.toString()}`;
+  }
+
+  const response = await fetch(`http://localhost:8080/api/${apiUrl}`);
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(`GET /${apiUrl}: ` + errorData?.message);
+  }
+
+  return response.json();
+};
+
+export const getPhotoTags = async (): Promise<Tag[]> => {
+  const apiUrl = `v1/tags/photos`;
+
+  const response = await fetch(`http://localhost:8080/api/${apiUrl}`);
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(`GET /${apiUrl}: ` + errorData?.message);
+  }
+
+  return response.json();
+};
