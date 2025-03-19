@@ -10,7 +10,7 @@ interface GalleryGridProps {
 }
 
 // Origin Helper: 컬럼 위치에 따라 적절한 origin 클래스를 반환하는 함수
-const getOriginClass = (index) => {
+const getOriginClass = (index: number) => {
   // 컬럼 위치 계산 (0: 왼쪽, 1: 중간, 2: 오른쪽)
   const columnPosition = index % 3;
 
@@ -24,14 +24,14 @@ const getOriginClass = (index) => {
   }
 };
 
-const GalleryGrid = ({ photos }: GalleryGridProps) => {
+export const GalleryGrid = ({ photos }: GalleryGridProps) => {
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto px-4">
       {/* 업로드 버튼 */}
-      <div className="mb-6 flex justify-center">
+      <div className="my-6 flex justify-center">
         <Link
           href="/gallery/photos/upload"
-          className="w-60 h-12 rounded bg-blue-500 text-white hover:bg-blue-600 transition flex justify-center items-center">
+          className="w-3/4 h-12 rounded bg-blue-500 text-white hover:bg-blue-600 transition flex justify-center items-center">
           <IoAdd className="mr-1" /> 사진 업로드
         </Link>
       </div>
@@ -48,16 +48,17 @@ const GalleryGrid = ({ photos }: GalleryGridProps) => {
             <div key={photo.id} className="relative group">
               {/* 호버 시 전체 컴포넌트가 확대되는 컨테이너 */}
               <div
-                className={`relative overflow-visible transition-all duration-300 ${getOriginClass(
-                  index
-                )} transform group-hover:scale-[1.8] group-hover:z-20 z-10`}>
+                className={`relative overflow-visible transition-all duration-300 
+                  ${getOriginClass(index)} 
+                  transform group-hover:scale-[1.8] group-hover:z-20 z-10`}>
                 {/* 이미지 컨테이너 */}
                 <div className="relative overflow-hidden rounded-md group-hover:rounded-b-none aspect-square shadow-md">
                   <Image
                     src={photo.fileUrl}
                     alt={photo.title}
                     fill
-                    sizes="33vw"
+                    sizes="50vw"
+                    quality={30}
                     priority
                     className="object-cover origin-bottom-right"
                   />
@@ -104,5 +105,3 @@ const GalleryGrid = ({ photos }: GalleryGridProps) => {
     </div>
   );
 };
-
-export default GalleryGrid;

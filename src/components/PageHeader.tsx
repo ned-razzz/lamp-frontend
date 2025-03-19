@@ -18,7 +18,7 @@ export const PageHeader = ({ title, Icon, linkTo }: PageHeaderProps) => {
 
   // linkTo 속성이 있으면 Link로 감싸고, 없으면 div로 반환
   return (
-    <div className="bg-white shadow mb-6">
+    <div className="bg-white shadow">
       <div className="container mx-auto px-4">
         <Link href={linkTo ?? "#"} className="group cursor-pointer inline-block">
           <HeaderContent />

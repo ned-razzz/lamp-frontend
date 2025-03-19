@@ -1,3 +1,5 @@
+import { Photo } from "./types";
+
 export interface PhotoBatchUpload {
   creatorMemberId: number;
   fileIds: number[];
@@ -49,4 +51,42 @@ export async function uploadPhotoFiles(files: File[]): Promise<number[]> {
   }
 
   return response.json();
+}
+
+export const getPhoto = async (id: string): Promise<Photo> => {
+  const apiUrl = `v1/photos/${id}`;
+  const response = await fetch(`http://localhost:8080/api/${apiUrl}`, {
+    next: { revalidate: 60 }, // 캐시 유효 시간 60초
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(`POST /${apiUrl}: ` + errorData?.message);
+  }
+
+  return response.json();
+};
+
+export const getPhotos = async (): Promise<Photo[]> => {
+  const apiUrl = "v1/photos";
+  const response = await fetch(`http://localhost:8080/api/${apiUrl}`);
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(`POST /${apiUrl}: ` + errorData?.message);
+  }
+
+  return response.json();
+};
+
+export async function deletePhoto(id: number) {
+  const response = await fetch(`http://localhost:8080/api/v1/photos/${id}`, {
+    method: "DELETE",
+  });
+
+  if (!response.ok) {
+    throw new Error(`Failed to delete photo with id ${id}`);
+  }
+
+  return true;
 }
