@@ -2,7 +2,6 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { IoAdd } from "react-icons/io5";
 import { Photo } from "../types";
 
 interface GalleryGridProps {
@@ -26,17 +25,7 @@ const getOriginClass = (index: number) => {
 
 export const GalleryGrid = ({ photos }: GalleryGridProps) => {
   return (
-    <div className="container mx-auto px-4">
-      {/* 업로드 버튼 */}
-      <div className="my-6 flex justify-center">
-        <Link
-          href="/gallery/photos/upload"
-          className="w-3/4 h-12 rounded bg-blue-500 text-white hover:bg-blue-600 transition flex justify-center items-center">
-          <IoAdd className="mr-1" /> 사진 업로드
-        </Link>
-      </div>
-
-      {/* 갤러리 그리드 - 3열 레이아웃 */}
+    <div className="mb-80">
       <div
         className="grid grid-cols-3 gap-2"
         onContextMenu={(e) => {
@@ -49,8 +38,8 @@ export const GalleryGrid = ({ photos }: GalleryGridProps) => {
               {/* 호버 시 전체 컴포넌트가 확대되는 컨테이너 */}
               <div
                 className={`relative overflow-visible transition-all duration-300 
-                  ${getOriginClass(index)} 
-                  transform group-hover:scale-[1.8] group-hover:z-20 z-10`}>
+                ${getOriginClass(index)} 
+                transform group-hover:scale-[1.8] group-hover:z-20 z-10`}>
                 {/* 이미지 컨테이너 */}
                 <div className="relative overflow-hidden rounded-md group-hover:rounded-b-none aspect-square shadow-md">
                   <Image
@@ -98,7 +87,7 @@ export const GalleryGrid = ({ photos }: GalleryGridProps) => {
           ))
         ) : (
           <div className="col-span-3 text-center py-12">
-            <p className="text-lg text-gray-500 mb-4">갤러리에 사진이 없습니다.</p>
+            <p className="text-lg text-gray-500 mb-4">검색 결과가 없습니다.</p>
           </div>
         )}
       </div>
