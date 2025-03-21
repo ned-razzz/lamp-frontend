@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { createPhotos, uploadPhotoFiles } from "../../actions";
 import { PhotoFormData, PhotoFormValue } from "../../types";
+import { extractDateFromImage } from "@/utils/extractDataFromImage";
 
 export const usePhotoUpload = () => {
   const router = useRouter();
@@ -13,7 +14,6 @@ export const usePhotoUpload = () => {
   // 공통 정보
   const [globalTags, setGlobalTags] = useState<string[]>([]);
   const [globalPhotographer, setGlobalPhotographer] = useState<string>("");
-  const [globalTakenAt, setGlobalTakenAt] = useState<string>(new Date().toISOString().slice(0, 16));
   const [tagErrors, setTagErrors] = useState<string>("");
 
   // 단일 사진의 기본 폼 데이터
@@ -21,9 +21,7 @@ export const usePhotoUpload = () => {
     title: "",
     description: "",
     photographer: "",
-    takenAt: new Date().toISOString().slice(0, 16),
     tagNames: [],
-    file: null,
   };
 
   // 여러 사진을 위한 데이터 배열
@@ -87,11 +85,13 @@ export const usePhotoUpload = () => {
           .map(async (file) => {
             const fileName = file.name.replace(/\.[^/.]+$/, ""); // 확장자 제거
             const title = fileName.length > 30 ? fileName.substring(0, 27) + "..." : fileName;
+            const takenAt = await extractDateFromImage(file);
 
             return {
               ...defaultPhotoData,
               title,
               file,
+              takenAt,
             };
           })
       );
@@ -162,7 +162,7 @@ export const usePhotoUpload = () => {
         title: photo.title,
         description: photo.description || "", // Use photo-specific description if it exists
         photographer: globalPhotographer, // Use global photographer for all
-        takenAt: new Date(globalTakenAt).toISOString(), // Use global takenAt for all
+        takenAt: photo.takenAt ?? undefined,
         fileId: fileIds[index],
       }));
 
@@ -190,23 +190,16 @@ export const usePhotoUpload = () => {
     setGlobalPhotographer(value);
   };
 
-  // 글로벌 촬영 날짜 변경
-  const handleGlobalTakenAtChange = (value: string) => {
-    setGlobalTakenAt(value);
-  };
-
   return {
     isSubmitting,
     uploadEnabled,
     globalTags,
     globalPhotographer,
-    globalTakenAt,
     tagErrors,
     photosData,
     errors,
     handleGlobalTagsChange,
     handleGlobalPhotographerChange,
-    handleGlobalTakenAtChange,
     removePhotoForm,
     handlePhotoDataChange,
     handleMultipleFiles,

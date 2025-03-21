@@ -17,18 +17,14 @@ interface PhotoFormProps {
 export const GlobalFormComponent = ({
   tags,
   photographer,
-  takenAt,
   onTagsChange,
   onPhotographerChange,
-  onTakenAtChange,
   errors,
 }: {
   tags: string[];
   photographer: string;
-  takenAt: string;
   onTagsChange: (tags: string[]) => void;
   onPhotographerChange: (value: string) => void;
-  onTakenAtChange: (value: string) => void;
   errors?: string;
 }) => {
   const [tagInput, setTagInput] = useState("");
@@ -75,20 +71,6 @@ export const GlobalFormComponent = ({
           onChange={(e) => onPhotographerChange(e.target.value)}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
           placeholder="모든 사진의 촬영자 이름"
-        />
-      </div>
-
-      {/* 촬영일시 입력 필드 */}
-      <div className="mb-4">
-        <label htmlFor="global-takenAt" className="block text-sm font-medium text-gray-700 mb-1">
-          촬영일시
-        </label>
-        <input
-          type="datetime-local"
-          id="global-takenAt"
-          value={takenAt}
-          onChange={(e) => onTakenAtChange(e.target.value)}
-          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-300"
         />
       </div>
 

@@ -10,13 +10,11 @@ const BatchPhotoUploadPage = () => {
     uploadEnabled,
     globalTags,
     globalPhotographer,
-    globalTakenAt,
     tagErrors,
     photosData,
     errors,
     handleGlobalTagsChange,
     handleGlobalPhotographerChange,
-    handleGlobalTakenAtChange,
     removePhotoForm,
     handlePhotoDataChange,
     handleMultipleFiles,
@@ -88,10 +86,8 @@ const BatchPhotoUploadPage = () => {
               <GlobalFormComponent
                 tags={globalTags}
                 photographer={globalPhotographer}
-                takenAt={globalTakenAt}
                 onTagsChange={handleGlobalTagsChange}
                 onPhotographerChange={handleGlobalPhotographerChange}
-                onTakenAtChange={handleGlobalTakenAtChange}
                 errors={tagErrors}
               />
             </>

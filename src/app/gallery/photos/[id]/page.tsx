@@ -15,6 +15,7 @@ export default async function PhotoDetailPage({ params }: PhotoDetailPageProps) 
   try {
     const { id } = await params;
     const photo = await getPhoto(id);
+    console.log(photo);
 
     return (
       <div className="container mx-auto p-4">

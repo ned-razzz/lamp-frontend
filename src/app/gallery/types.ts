@@ -19,9 +19,9 @@ export interface PhotoFormData {
   title: string;
   description: string;
   photographer: string;
-  takenAt: string;
+  takenAt?: Date;
   tagNames: string[];
-  file: File | null;
+  file?: File;
 }
 
 export type PhotoFormValue = string | string[] | File;

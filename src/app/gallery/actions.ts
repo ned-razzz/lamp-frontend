@@ -8,7 +8,7 @@ export interface PhotoBatchUpload {
     title: string;
     description: string;
     photographer: string;
-    takenAt: string;
+    takenAt?: Date;
     fileId: number;
   }[];
 }
