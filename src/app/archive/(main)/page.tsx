@@ -1,7 +1,7 @@
 import React from "react";
 import { SearchableArchive, ToolBar } from "./components";
-import { Tag, Document } from "./types";
-import { getDocuments, getDocumentTags } from "./actions";
+import { Tag, Document } from "../types";
+import { getDocuments, getDocumentTags } from "../actions";
 
 const ArchivePage = async () => {
   const tags: Tag[] = await getDocumentTags();
